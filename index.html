@@ -8,15 +8,9 @@
   </head>
   <body>
     <div class="container" ng-controller="MainCtrl as ctrl">
-      <h1>Flickr Photo Album</h1>
-      <div class="form-inline form-group">
-        <label for="txtSearchTag">Search tag:</label>
-        <input type="text" id="txtSearchTag" ng-model="ctrl.searchTag" class="form-control" required="required">
-        <button class="form-control" ng-click="ctrl.service.loadImages(ctrl.searchTag)">Load images</button>
-        <span class="pull-right">Number of hits: {{ctrl.service.numberOfHits()}}</span>
-      </div>
-      <flickr-gallery data="ctrl.service.images" />
+      <map></map>
     </div>
+     <script src="http://openlayers.org/en/v3.16.0/build/ol.js" type="text/javascript"></script>
     <!-- @if NODE_ENV='development' -->
     <script src="/jspm_packages/system.js"></script>
     <script src="/config.js"></script>
