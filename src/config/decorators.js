@@ -75,7 +75,7 @@ export function injectAs (dep) {
 }
 
 /**
- * @example
+ * @exemple
  *  import {directive, inject} from './decorators';
  *  import {baseUrl} from './constants';
  *
@@ -98,12 +98,13 @@ export function injectAs (dep) {
  *    }
  *  }
  */
-export function directive (opts) {
+export function directive (opts = {}) {
   return function decorate (Target) {
     let name = opts.name || getTargetName(Target);
     name = name.substring(0,1).toLowerCase() + name.substring(1);
     function factory(...deps) {
-      let inject = Target.$inject || [];
+      let inject = Target.$inject || [],
+        controller;
       let directiveDefinitionObject = {
         priority: opts.priority,
         template: opts.template,
@@ -113,22 +114,42 @@ export function directive (opts) {
         templateNamespace: opts.templateNamespace,
         scope: opts.scope,
         controller: [...inject, function (...deps) {
-          return new Target(...deps);
+          controller = new Target(...deps);
+          return controller;
         }],
-        controllerAs: opts.controllerAs || 'ctrl',
-        bindToController: opts.bindToController || true,
-        require: opts.require
+        controllerAs: opts.scope ? opts.controllerAs || 'ctrl' : null,
+        bindToController: true,
+        require: opts.require,
+        replace: opts.replace,
+        compile: function compile (...args) {
+          let compileFn;
+          if (Target.compile) {
+            compileFn = Target.compile(...args);
+          }
+          return function link (scope, element, attrs, requires) {
+            if (compileFn) {
+              if (controller) {
+                compileFn.call(controller, scope, element, attrs, requires);
+              } else {
+                compileFn(scope, element, attrs, requires);
+              }
+            }
+
+            if (Target.link) {
+              return Target.link(scope, element, attrs, requires);
+            }
+            if (controller) {
+              controller.$scope = scope;
+              controller.$element = element;
+              controller.$attrs = attrs;
+              controller.$requires = requires;
+              if (controller.link) {
+                return controller.link(scope, element, attrs, requires);
+              }
+            }
+          };
+        }
       };
-      if (Target.compile) {
-        directiveDefinitionObject.compile = function compile(...args) {
-          return Target.compile(...args);
-        };
-      }
-      if (Target.link) {
-        directiveDefinitionObject.link = function link(...args) {
-          return Target.link(...args);
-        };
-      }
       return directiveDefinitionObject;
     }
     decoratorsModule.directive(name, factory);
