@@ -1,4 +1,7 @@
-# Angular ES6
+# Weather Map test
+
+
+# Doc from angular ES6
 
 This example shows how to use ES6 with [AngularJS](https://angularjs.org/).
 
