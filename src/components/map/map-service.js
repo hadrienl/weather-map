@@ -10,18 +10,18 @@ export class Map {
     return this.ol;
   }
 
-  createMap(el, { lat, long }) {
+  createMap(el, { lat, long, zoom = 4 }) {
     const ol = this.ol;
     return new ol.Map({
       target: el,
       layers: [
         new ol.layer.Tile({
-          source: new ol.source.MapQuest({layer: 'sat'})
+          source: new ol.source.OSM()
         })
       ],
       view: new ol.View({
         center: ol.proj.fromLonLat([lat, long]),
-        zoom: 4
+        zoom: zoom
       })
     });
   }
