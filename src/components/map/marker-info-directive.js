@@ -2,6 +2,9 @@ import {directive, inject} from '../../config/decorators';
 
 @directive({
   restrict: 'E',
+  scope: {
+    onClick: '&'
+  },
   require: ['^map', '^marker']
 })
 @inject('$element')
@@ -24,6 +27,9 @@ export class MarkerInfo {
         return;
       }
       this.info.open(map, marker);
+      if (this.onClick) {
+        this.onClick();
+      }
     });
   }
 }

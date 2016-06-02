@@ -17,15 +17,19 @@ System.config({
 
 System.config({
   "map": {
-    "angular": "github:angular/bower-angular@1.4.7",
+    "angular": "github:angular/bower-angular@1.5.6",
     "angular-mocks": "github:angular/bower-angular-mocks@1.4.7",
+    "angular-sanitize": "github:angular/bower-angular-sanitize@1.5.6",
     "babel": "npm:babel-core@5.8.32",
     "babel-runtime": "npm:babel-runtime@5.8.29",
     "bootstrap": "github:twbs/bootstrap@3.3.5",
     "core-js": "npm:core-js@0.9.18",
     "jquery": "github:components/jquery@2.1.4",
     "github:angular/bower-angular-mocks@1.4.7": {
-      "angular": "github:angular/bower-angular@1.4.7"
+      "angular": "github:angular/bower-angular@1.5.6"
+    },
+    "github:angular/bower-angular-sanitize@1.5.6": {
+      "angular": "github:angular/bower-angular@1.5.6"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"

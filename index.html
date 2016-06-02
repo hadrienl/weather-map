@@ -19,8 +19,9 @@
           lat="city.lat"
           long="city.long"
           title="city.name">
-          <marker-info>
-            {{ city.name }}
+          <marker-info
+            on-click="ctrl.loadWeather(city)"
+            ng-bind-html="city.text || '…wait for it…'">
           </marker-info>
         </marker>
       </map>

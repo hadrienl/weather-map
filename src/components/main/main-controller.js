@@ -1,8 +1,11 @@
-import {controller} from '../../config/decorators';
+import {controller, inject} from '../../config/decorators';
 
 @controller
 export class MainCtrl {
+  @inject Weather;
+  @inject XML;
   constructor() {
+
     this.lat = 47.00308414660523;
     this.long = 2.1278085937499425;
     this.zoom = 6;
@@ -48,5 +51,10 @@ export class MainCtrl {
       lat: 50.650,
       long: 3.083
     }];
+  }
+
+  loadWeather(city) {
+    this.Weather.getWeatherByLocation(city.name)
+      .then(data => city.text = this.XML.getCDATA(data.description));
   }
 }
