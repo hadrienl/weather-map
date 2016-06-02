@@ -12,6 +12,9 @@
   "license": "MIT",
   "author": "Vildan Softic <zewa666@gmail.com>",
   "main": "index.js",
+  "scripts": {
+    "start": "gulp"
+  },
   "devDependencies": {
     "babel-eslint": "^6.0.4",
     "browser-sync": "^1.8.1",

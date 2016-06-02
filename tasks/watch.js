@@ -75,7 +75,7 @@ gulp.task('build', function(callback) {
 gulp.task('serve', ['build'], function(done) {
   browserSync({
     open: false,
-    port: 9000,
+    port: process.env.PORT,
     files: {
       src: path.css
     },
