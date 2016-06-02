@@ -11,7 +11,6 @@ export class Map {
   }
 
   createMap(el, { lat, long, zoom = 4 }) {
-    console.log(lat, long, zoom);
     return new this._lib.Map(el, {
       zoom: zoom,
       center: {lat, lng: long}
