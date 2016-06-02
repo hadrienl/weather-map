@@ -15,10 +15,15 @@ export class MarkerInfo {
   link(scope, el, attrs, ctrls) {
     const [map, marker] = ctrls;
     scope.$watch(() => marker.marker, newVal => this.attach(map.map, newVal));
+    this.info = this.Map.createInfoWindow(this.$element[0]);
   }
 
   attach(map, marker) {
-    this.info = this.Map.createInfoWindow(this.$element[0].innerHTML);
-    marker.addListener('click', () => this.info.open(map, marker));
+    marker.addListener('click', () => {
+      if (!marker) {
+        return;
+      }
+      this.info.open(map, marker);
+    });
   }
 }
