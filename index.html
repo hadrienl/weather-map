@@ -7,14 +7,26 @@
     <!-- endbuild -->
   </head>
   <body>
-    <div class="container" ng-controller="MainCtrl as ctrl">
+    <div
+      ng-controller="MainCtrl as ctrl">
       <map
         coin="prout"
         center-lat="ctrl.lat"
         center-long="ctrl.long"
-        center-zoom="ctrl.zoom"></map>
+        center-zoom="ctrl.zoom">
+        <marker
+          ng-repeat="city in ctrl.cities"
+          lat="city.lat"
+          long="city.long"
+          title="city.name">
+          <marker-info>
+            {{ city.name }}
+          </marker-info>
+        </marker>
+      </map>
     </div>
-     <script src="http://openlayers.org/en/v3.16.0/build/ol.js" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrW1MTa3DIoyBfqQ7NoQcGw2mLrK-RbQA"
+  type="text/javascript"></script>
     <!-- @if NODE_ENV='development' -->
     <script src="/jspm_packages/system.js"></script>
     <script src="/config.js"></script>

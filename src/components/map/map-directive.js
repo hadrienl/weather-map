@@ -3,6 +3,7 @@ import {baseURL} from '../../config/constants';
 
 @directive({
   restrict: 'E',
+  transclude: true,
   scope: {
     centerLat: '=',
     centerLong: '=',
